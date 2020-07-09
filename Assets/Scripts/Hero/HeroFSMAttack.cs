@@ -9,61 +9,66 @@ public class HeroFSMAttack : HeroFSM
     {
         base.OnEnter(_manager);
         Manager.Anim.SetBool("Attack", true);
-        NextMostion(currentMostionType);
+
+        isContinue = false;
+        next = false;
+        motion = 1;
+
+        Manager.Anim.SetInteger("AttackMotion", 1);
+
     }
 
     public override void OnExit(HeroManager _manager)
     {
         base.OnExit(_manager);
-        isMostionContinue = false;
-        currentMostionType = 1;
-        currentMostionTime = 0f;
         Manager.Anim.SetBool("Attack", false);
-        Manager.Anim.SetInteger("AttackMotion", 0);
     }
 
-    float endMotionTimer = 1.0f;
-    float currentMostionTime = 0f;
-    bool isMostionContinue;
-    int maxMotionType = 3;
-    int currentMostionType;
+    bool isContinue;
+    bool next;
+    int motion;
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        if (currentMostionTime < endMotionTimer)
+        if(Input.GetKeyDown(KeyCode.Z))
         {
-            currentMostionTime += Time.deltaTime;
+            isContinue = true;
+        }
 
-            if (Input.GetMouseButtonDown(0) && currentMostionType < maxMotionType)
+        if(next && isContinue)
+        {
+            if(motion == 1)
             {
-                isMostionContinue = true;
+                Manager.Anim.SetInteger("AttackMotion", 2);
+                motion = 2;
+                next = false;
+                isContinue = false;
+            }
+            else if (motion == 2)
+            {
+                Manager.Anim.SetInteger("AttackMotion", 3);
+                motion = 3;
+                next = false;
+                isContinue = false;
             }
         }
-        else if(!isMostionContinue && currentMostionTime > endMotionTimer)
+
+    }
+
+    public void NextMostion()
+    {
+        next = true;
+    }
+
+    public void EndMotion()
+    {
+        if (!isContinue || motion >= 3)
         {
             Manager.SetState(State.Idle);
+            Manager.Anim.SetInteger("AttackMotion", 0);
         }
-
-        if(isMostionContinue && currentMostionTime > 0.5f)
-        {
-            currentMostionType++;
-            NextMostion(currentMostionType);
-            isMostionContinue = false;
-        }
-
-    }
-
-    // 다음 모션이 실행 되면 모션 예약을 받을 수 있도록 레디 상태로 변경
-    public void SetMostionReady()
-    {
-        currentMostionTime = 0f;
-    }
-
-    public void NextMostion(int motion)
-    {
-        Manager.Anim.SetInteger("AttackMotion", motion);
     }
 
 }

@@ -20,8 +20,7 @@ public class HeroFSMIdle : HeroFSM
     {
         base.OnUpdate();
 
-
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.Z))
         {
             Manager.SetState(State.Attack);
         }
