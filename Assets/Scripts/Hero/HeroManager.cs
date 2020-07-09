@@ -6,9 +6,7 @@ public enum State
 {
     Idle = 0,
     Move,
-    Attack1,
-    Attack2,
-    Attack3
+    Attack
 }
 
 public class HeroManager : MonoBehaviour
