@@ -22,7 +22,7 @@ public class HeroFSMIdle : HeroFSM
 
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            Manager.SetState(State.Attack);
+            Manager.SetState(State.Attack1);
         }
 
     }

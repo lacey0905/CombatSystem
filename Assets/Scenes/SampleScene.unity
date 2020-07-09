@@ -225,6 +225,8 @@ GameObject:
   - component: {fileID: 845111666}
   - component: {fileID: 845111665}
   - component: {fileID: 845111664}
+  - component: {fileID: 845111670}
+  - component: {fileID: 845111669}
   - component: {fileID: 845111663}
   - component: {fileID: 845111662}
   - component: {fileID: 845111668}
@@ -263,7 +265,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 845111661}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a255dcbc714c0a40ade70be16eb5da7, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cd97467e909e57498c86da0487d7c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &845111664
@@ -306,6 +308,8 @@ MonoBehaviour:
   stateList:
   - {fileID: 845111665}
   - {fileID: 845111664}
+  - {fileID: 845111670}
+  - {fileID: 845111669}
   - {fileID: 845111663}
 --- !u!4 &845111667
 Transform:
@@ -335,6 +339,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraArm: {fileID: 1114748693}
+--- !u!114 &845111669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845111661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9524c0fa84dbda944a16a0ffab669805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &845111670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845111661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393cc1ba096fb3449b0f52e4fa5434b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &921588987
 GameObject:
   m_ObjectHideFlags: 0
