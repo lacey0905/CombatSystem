@@ -9,6 +9,8 @@ public class TPSCharacterController : MonoBehaviour
     [SerializeField]
     private Transform cameraArm;
 
+    public Transform Cam;
+
     private void Awake()
     {
         
@@ -33,7 +35,8 @@ public class TPSCharacterController : MonoBehaviour
         {
             x = Mathf.Clamp(x, 335f, 361f);
         }
-        cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
+        cameraArm.rotation = Quaternion.Euler(x, camAngle.y, camAngle.z);
+        Cam.rotation = Quaternion.Euler(0f, camAngle.y + mouseDelta.x, 0f);
     }
 
 

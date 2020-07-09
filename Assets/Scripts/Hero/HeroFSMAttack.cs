@@ -29,11 +29,14 @@ public class HeroFSMAttack : HeroFSM
     {
         base.OnUpdate();
 
-        if(atkMode == 0)
+        Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (atkMode == 0)
         {
             if(isLoop)
             {
                 timer += Time.deltaTime;
+                look = timer < 0.2f;
                 if (Input.GetMouseButtonDown(0))
                 {
                     reserve = true;
@@ -47,7 +50,14 @@ public class HeroFSMAttack : HeroFSM
                 else if (timer > 1.0f)
                 {
                     isLoop = false;
-                    Manager.SetState(State.Idle);
+                    if(movement.x != 0f || movement.y != 0f)
+                    {
+                        Manager.SetState(State.Move);
+                    }
+                    else
+                    {
+                        Manager.SetState(State.Idle);
+                    }
                 }
             }
         }
@@ -57,6 +67,8 @@ public class HeroFSMAttack : HeroFSM
             if (isLoop)
             {
                 timer += Time.deltaTime;
+                look = timer < 0.2f;
+                move = timer < 0.4f;
                 if (Input.GetMouseButtonDown(0))
                 {
                     reserve = true;
@@ -70,7 +82,14 @@ public class HeroFSMAttack : HeroFSM
                 else if (timer > 1.0f)
                 {
                     isLoop = false;
-                    Manager.SetState(State.Idle);
+                    if (movement.x != 0f || movement.y != 0f)
+                    {
+                        Manager.SetState(State.Move);
+                    }
+                    else
+                    {
+                        Manager.SetState(State.Idle);
+                    }
                 }
             }
         }
@@ -79,14 +98,36 @@ public class HeroFSMAttack : HeroFSM
             if (isLoop)
             {
                 timer += Time.deltaTime;
+                look = timer < 0.2f;
+                move = timer < 0.7f;
                 if (timer > 1.0f)
                 {
                     isLoop = false;
-                    Manager.SetState(State.Idle);
+                    if (movement.x != 0f || movement.y != 0f)
+                    {
+                        Manager.SetState(State.Move);
+                    }
+                    else
+                    {
+                        Manager.SetState(State.Idle);
+                    }
                 }
             }
         }
+
+        if(look)
+        {
+            Quaternion newRot = Quaternion.LookRotation(Manager.Camera.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRot, Time.deltaTime * 20f);
+        }
+        if(move)
+        {
+            transform.position += Manager.Camera.forward * 2f * Time.deltaTime;
+        }
     }
+
+    bool move = false;
+    bool look = false;
 
     public void Atk1()
     {
@@ -94,7 +135,8 @@ public class HeroFSMAttack : HeroFSM
         reserve = false;
         isLoop = true;
         timer = 0f;
-        Debug.Log("ATK1");
+        look = true;
+        move = false;
     }
 
     public void Atk2()
@@ -103,7 +145,8 @@ public class HeroFSMAttack : HeroFSM
         reserve = false;
         isLoop = true;
         timer = 0f;
-        Debug.Log("ATK2");
+        look = true;
+        move = true;
     }
 
     public void Atk3()
@@ -112,7 +155,8 @@ public class HeroFSMAttack : HeroFSM
         reserve = false;
         isLoop = true;
         timer = 0f;
-        Debug.Log("ATK3");
+        look = true;
+        move = true;
     }
 
 }

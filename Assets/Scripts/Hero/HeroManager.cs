@@ -22,6 +22,8 @@ public class HeroManager : MonoBehaviour
 
     bool isStart = false;
 
+    public Transform Camera;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
